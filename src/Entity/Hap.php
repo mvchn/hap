@@ -10,6 +10,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @ORM\Entity(repositoryClass=HapRepository::class)
+ * @ORM\Table(name="haps")
  * @ORM\EntityListeners({"App\EntityListener\HapEntityListener"})
  * @ORM\HasLifecycleCallbacks()
  */

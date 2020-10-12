@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=TickRepository::class)
+ * @ORM\Table(name="ticks")
  */
 class Tick
 {
