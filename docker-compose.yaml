@@ -12,3 +12,7 @@ services:
   redis:
     image: redis:5-alpine
     ports: [6379]
+
+  mailer:
+    image: schickling/mailcatcher
+    ports: [1025, 1080]

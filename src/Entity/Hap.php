@@ -6,9 +6,11 @@ use App\Repository\HapRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @ORM\Entity(repositoryClass=HapRepository::class)
+ * @ORM\EntityListeners({"App\EntityListener\HapEntityListener"})
  * @ORM\HasLifecycleCallbacks()
  */
 class Hap
@@ -40,10 +42,15 @@ class Hap
      */
     private $ticks;
 
-//    /**
-//     * @ORM\Column(type="datetime")
-//     */
-    //private $createdAt;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -61,6 +68,14 @@ class Hap
     public function setCreatedAtValue()
     {
         $this->createdAt = new \DateTime();
+    }
+
+
+    public function computeSlug(SluggerInterface $slugger)
+    {
+        if (!$this->slug || '-' === $this->slug) {
+            $this->slug = (string) $slugger->slug((string) $this)->lower();
+        }
     }
 
     public function getId(): ?int
@@ -135,15 +150,27 @@ class Hap
         return $this;
     }
 
-//    public function getCreatedAt(): ?\DateTimeInterface
-//    {
-//        return $this->createdAt;
-//    }
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
 
-//    public function setCreatedAt(\DateTimeInterface $createdAt): self
-//    {
-//        $this->createdAt = $createdAt;
-//
-//        return $this;
-//    }
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
 }
