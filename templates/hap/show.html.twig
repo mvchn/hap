@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hap{% endblock %}
+
+{% block body %}
+    <h2>{{ hap.title }}</h2>
+
+    <div>There are {{ ticks|length }} comments.</div>
+    {% for tick in ticks %}
+        <p>{{ tick.title }}</p>
+    {% endfor %}
+
+    {% if previous >= 0 %}
+        <a href="{{ path('hap', { id: conference.id, offset: previous }) }}">Previous</a>
+    {% endif %}
+    {% if next < ticks|length %}
+        <a href="{{ path('hap', { id: conference.id, offset: next }) }}">Next</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Haps{% endblock %}
+
+{% block body %}
+    <h2>Hap</h2>
+
+    {% for hap in haps %}
+        <h4>{{ hap }}</h4>
+        <p><a href="{{ path('hap', { id: hap.id }) }}">View</a></p>
+    {% endfor %}
+{% endblock %}
