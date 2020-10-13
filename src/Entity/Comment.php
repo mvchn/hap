@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ORM\Table(name="comments")
  */
 class Comment
 {
@@ -44,6 +45,22 @@ class Comment
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $state;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -89,13 +106,6 @@ class Comment
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     public function getState(): ?string

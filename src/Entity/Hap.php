@@ -155,12 +155,12 @@ class Hap
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
+//    public function setCreatedAt(\DateTimeInterface $createdAt): self
+//    {
+//        $this->createdAt = $createdAt;
+//
+//        return $this;
+//    }
 
     public function getSlug(): ?string
     {
