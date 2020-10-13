@@ -71,7 +71,6 @@ class Hap
         $this->createdAt = new \DateTime();
     }
 
-
     public function computeSlug(SluggerInterface $slugger)
     {
         if (!$this->slug || '-' === $this->slug) {
@@ -121,14 +120,14 @@ class Hap
     }
 
     /**
-     * @return Collection|tick[]
+     * @return Collection|Tick[]
      */
     public function getTicks(): Collection
     {
         return $this->ticks;
     }
 
-    public function addTick(tick $tick): self
+    public function addTick(Tick $tick): self
     {
         if (!$this->ticks->contains($tick)) {
             $this->ticks[] = $tick;
@@ -138,7 +137,7 @@ class Hap
         return $this;
     }
 
-    public function removeTick(tick $tick): self
+    public function removeTick(Tick $tick): self
     {
         if ($this->ticks->contains($tick)) {
             $this->ticks->removeElement($tick);
